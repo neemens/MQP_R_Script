@@ -11,9 +11,9 @@ library(writexl);
 library(minerva)
 
 
-# Read the data sets
 
-testis_data <- read_excel("Testis_expression_data.xlsx", sheet = 2)
+
+testis_data <- read_excel("Testis_expression_data.xlsx", sheet = 2)# Read the data sets
 
 # Extract the expression values for the  RFX isoform
 rfx_isoform_3 <- testis_data[1, ] %>%
@@ -27,7 +27,7 @@ isoform_3_results <- data.frame(Gene = character(),
                                 stringsAsFactors = FALSE)
 
 
-for (i in 1:nrow(testis_data)) {# Loop through each brain isoform and compute Spearman correlation
+for (i in 1:nrow(testis_data)) {# Loop through each brain isoform and compute correlation
   # Extract the expression values for the current brain isoform
   testis_isoform <- testis_data[i, ] %>%
     select(-ensgid, -enstid)
@@ -35,7 +35,7 @@ for (i in 1:nrow(testis_data)) {# Loop through each brain isoform and compute Sp
   testis_isoform <- as.numeric(unlist(testis_isoform)) # Convert to numeric values
   
   
-  mic_value <- mine(rfx_isoform_3, testis_isoform)$MIC
+  mic_value <- mine(rfx_isoform_3, testis_isoform)$MIC # perform MIC corrilation
   
   # Store the results
   isoform_3_results[i, "Gene"] <- as.character(testis_data$ensgid[i])
